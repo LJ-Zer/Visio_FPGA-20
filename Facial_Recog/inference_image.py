@@ -157,6 +157,12 @@ for image_path in images:
 
 # Loop over every image and perform detection
     for image_path in images:
+         # Move the processed image (modify filename logic if needed)
+        new_filename = os.path.basename(image_path)  # Extract filename from path
+        new_path = os.path.join(PROCESSED_DIR, new_filename)
+        os.rename(image_path, new_path)  # Move the original image
+        print(f"Image '{image_path}' processed and moved to '{new_path}'")
+        
         if image_path in processed_images:
             continue
         processed_images = set()  # Track processed images (not used in this case)
@@ -205,11 +211,7 @@ for image_path in images:
                     cv2.imwrite(image_path, cropped_image_resized)  # Capture the frame
                     print("Resized and cropped image captured and saved!")
                     lord_john_perucho_counter += 1
-                     # Move the processed image (modify filename logic if needed)
-                    new_filename = os.path.basename(image_path)  # Extract filename from path
-                    new_path = os.path.join(PROCESSED_DIR, new_filename)
-                    os.rename(image_path, new_path)  # Move the original image
-                    print(f"Image '{image_path}' processed and moved to '{new_path}'")
+                    
 
              
     # Show the image with the bounding boxes
