@@ -202,12 +202,12 @@ for image_path in images:
 
              
     # Show the image with the bounding boxes
-    # if show_results:
-    #     cv2.imshow('VisioAccelerAI Face Recognition', image)
+    if show_results:
+        cv2.imshow('VisioAccelerAI Face Recognition', image)
 
-    #     # Press any key to continue to the next image, or press 'q' to quit
-    #     if cv2.waitKey(0) == ord('q'):
-    #         break
+        # Press any key to continue to the next image, or press 'q' to quit
+        if cv2.waitKey(0) == ord('q'):
+            break
 
 # Clean up
 cv2.destroyAllWindows()
