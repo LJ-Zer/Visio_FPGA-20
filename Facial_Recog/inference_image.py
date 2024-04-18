@@ -124,8 +124,6 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
-PROCESSED_DIR = os.path.join(CWD_PATH, '../Face_Detect/processed_images')
-
 for image_path in images:
 
     image = cv2.imread(image_path)
@@ -172,13 +170,6 @@ for image_path in images:
                 print("Resized and cropped image captured and saved!")
                 lord_john_perucho_counter += 1
                 
-                # Move the processed image (modify filename logic if needed)
-                new_filename = os.path.basename(image_path)  # Extract filename from path
-                new_path = os.path.join(PROCESSED_DIR, new_filename)
-                os.rename(image_path, new_path)  # Move the original image
-                print(f"Image '{image_path}' processed and moved to '{new_path}'")
-                            
-            
 # Show the image with the bounding boxes
     if show_results:
         cv2.imshow('VisioAccelerAI Face Recognition', image)
