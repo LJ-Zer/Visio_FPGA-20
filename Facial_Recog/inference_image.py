@@ -123,6 +123,8 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
     boxes_idx, classes_idx, scores_idx = 1, 3, 0
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
+    
+PROCESSED_DIR = os.path.join(CWD_PATH, '../Face_Detect/processed_images')
 
 for image_path in images:
 
