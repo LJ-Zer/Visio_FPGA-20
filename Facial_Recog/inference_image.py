@@ -9,7 +9,7 @@ import datetime
 # Define and parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--modeldir', help='Folder the .tflite file is located in',
-                    required=True)
+                    required=True, default='')
 parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite',
                     default='detect.tflite')
 parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt',
@@ -17,7 +17,7 @@ parser.add_argument('--labels', help='Name of the labelmap file, if different th
 parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects',
                     default=0.5)
 parser.add_argument('--imagedir', help='Name of the folder containing images to perform detection on. Folder must contain only images.',
-                    required=True)
+                    required=True, default='../Face_Detect/face_detected')
 parser.add_argument('--save_results', help='Save labeled images and annotation data to a results folder',
                     action='store_true')
 parser.add_argument('--noshow_results', help='Don\'t show result images (only use this if --save_results is enabled)',
