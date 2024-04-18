@@ -184,5 +184,5 @@ while True:
                     processed_images.add(image_path)
 
 
-# Clean up
-cv2.destroyAllWindows()
+    # Clean up
+    cv2.destroyAllWindows()
