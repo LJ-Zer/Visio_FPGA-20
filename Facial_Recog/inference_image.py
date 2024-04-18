@@ -149,9 +149,9 @@ for image_path in images:
     detections = []
 
     processed_images = set()  # Track processed images
-    PROCESSED_DIR = "../Face_Detect/processed_images"
+    PROCESSED_DIR = os.path.join(CWD_PATH, '../Face_Detect/processed_images')
 
-# Create directory for processed images if it doesn't exist
+    # Create directory for processed images if it doesn't exist
     if not os.path.exists(PROCESSED_DIR):
         os.makedirs(PROCESSED_DIR)
 
@@ -159,7 +159,8 @@ for image_path in images:
     for image_path in images:
         if image_path in processed_images:
             continue
-        # Load image and resize to the expected shape [1xHxWx3]
+        processed_images = set()  # Track processed images (not used in this case)
+
         image = cv2.imread(image_path)
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         imH, imW, _ = image.shape
@@ -207,7 +208,7 @@ for image_path in images:
                      # Move the processed image (modify filename logic if needed)
                     new_filename = os.path.basename(image_path)  # Extract filename from path
                     new_path = os.path.join(PROCESSED_DIR, new_filename)
-                    os.rename(image_path, new_path)
+                    os.rename(image_path, new_path)  # Move the original image
                     print(f"Image '{image_path}' processed and moved to '{new_path}'")
 
              
