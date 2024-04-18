@@ -124,9 +124,8 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
-# Loop over every image and perform detection
 for image_path in images:
-    # Load image and resize to the expected shape [1xHxWx3]
+
     image = cv2.imread(image_path)
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     imH, imW, _ = image.shape
@@ -145,77 +144,45 @@ for image_path in images:
     boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]  # Bounding box coordinates of detected objects
     classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
+    
+    processed_images.add(image_path)
 
-    detections = []
+    # Loop over all detections and save cropped images if the detected object is "Leo Delen"
+    for i in range(len(scores)):
+        if 0 <= int(classes[i]) < len(labels) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0):
+            object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
+            
+            if object_name == "Lord John Perucho":
+                now = datetime.datetime.now()
+                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                ymin = int(max(1, (boxes[i][0] * imH)))
+                xmin = int(max(1, (boxes[i][1] * imW)))
+                ymax = int(min(imH, (boxes[i][2] * imH)))
+                xmax = int(min(imW, (boxes[i][3] * imW)))
+                cropped_image = image[ymin:ymax, xmin:xmax]
 
-    processed_images = set()  # Track processed images
-    PROCESSED_DIR = os.path.join(CWD_PATH, '../Face_Detect/processed_images')
+                # Resize the cropped image to the desired size (320x320)
+                cropped_image_resized = cv2.resize(cropped_image, (320, 320))
 
-    # Create directory for processed images if it doesn't exist
-    if not os.path.exists(PROCESSED_DIR):
-        os.makedirs(PROCESSED_DIR)
-
-# Loop over every image and perform detection
-    for image_path in images:
-
-        image = cv2.imread(image_path)
-        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        imH, imW, _ = image.shape
-        image_resized = cv2.resize(image_rgb, (width, height))
-        input_data = np.expand_dims(image_resized, axis=0)
-
-        # Normalize pixel values if using a floating model (i.e., if the model is non-quantized)
-        if floating_model:
-            input_data = (np.float32(input_data) - input_mean) / input_std
-
-        # Perform the actual detection by running the model with the image as input
-        interpreter.set_tensor(input_details[0]['index'], input_data)
-        interpreter.invoke()
-
-        # Retrieve detection results
-        boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]  # Bounding box coordinates of detected objects
-        classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
-        scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
-        
-        processed_images.add(image_path)
-
-        # Loop over all detections and save cropped images if the detected object is "Leo Delen"
-        for i in range(len(scores)):
-            if 0 <= int(classes[i]) < len(labels) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0):
-                object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
+                # Save the resized cropped image
+                image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                image_path = os.path.join(save_folder1, image_name)
+                cv2.imwrite(image_path, cropped_image_resized)  # Capture the frame
+                print("Resized and cropped image captured and saved!")
+                lord_john_perucho_counter += 1
                 
-                if object_name == "Lord John Perucho":
-                    now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
-                    ymin = int(max(1, (boxes[i][0] * imH)))
-                    xmin = int(max(1, (boxes[i][1] * imW)))
-                    ymax = int(min(imH, (boxes[i][2] * imH)))
-                    xmax = int(min(imW, (boxes[i][3] * imW)))
-                    cropped_image = image[ymin:ymax, xmin:xmax]
+                if image_path in processed_images:
+                    continue
+                processed_images = set()  # Track processed images (not used in this case)
 
-                    # Resize the cropped image to the desired size (320x320)
-                    cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-
-                    # Save the resized cropped image
-                    image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                    image_path1 = os.path.join(save_folder1, image_name)
-                    cv2.imwrite(image_path1, cropped_image_resized)  # Capture the frame
-                    print("Resized and cropped image captured and saved!")
-                    lord_john_perucho_counter += 1
-                   
-                    if image_path in processed_images:
-                        continue
-                    processed_images = set()  # Track processed images (not used in this case)
-
-                    # Move the processed image (modify filename logic if needed)
-                    new_filename = os.path.basename(image_path)  # Extract filename from path
-                    new_path = os.path.join(PROCESSED_DIR, new_filename)
-                    os.rename(image_path, new_path)  # Move the original image
-                    print(f"Image '{image_path}' processed and moved to '{new_path}'")
-                                
-
-             
-    # Show the image with the bounding boxes
+                # Move the processed image (modify filename logic if needed)
+                new_filename = os.path.basename(image_path)  # Extract filename from path
+                new_path = os.path.join(PROCESSED_DIR, new_filename)
+                os.rename(image_path, new_path)  # Move the original image
+                print(f"Image '{image_path}' processed and moved to '{new_path}'")
+                            
+            
+# Show the image with the bounding boxes
     if show_results:
         cv2.imshow('VisioAccelerAI Face Recognition', image)
 
