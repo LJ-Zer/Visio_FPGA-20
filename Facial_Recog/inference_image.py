@@ -123,7 +123,7 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
     boxes_idx, classes_idx, scores_idx = 1, 3, 0
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
-    
+
 PROCESSED_DIR = os.path.join(CWD_PATH, '../Face_Detect/processed_images')
 
 for image_path in images:
@@ -147,7 +147,6 @@ for image_path in images:
     classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
     
-    processed_images.add(image_path)
 
     # Loop over all detections and save cropped images if the detected object is "Leo Delen"
     for i in range(len(scores)):
@@ -173,10 +172,6 @@ for image_path in images:
                 print("Resized and cropped image captured and saved!")
                 lord_john_perucho_counter += 1
                 
-                if image_path in processed_images:
-                    continue
-                processed_images = set()  # Track processed images (not used in this case)
-
                 # Move the processed image (modify filename logic if needed)
                 new_filename = os.path.basename(image_path)  # Extract filename from path
                 new_path = os.path.join(PROCESSED_DIR, new_filename)
