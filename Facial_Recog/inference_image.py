@@ -6,6 +6,8 @@ import sys
 import glob
 import importlib.util
 import datetime
+import shutil  # Import the shutil module for file operations
+
 # Define and parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--modeldir', help='Folder the .tflite file is located in',
@@ -124,29 +126,35 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
-for image_path in images:
 
+processed_images = set()
+processed_images_folder = 'processed_images'  # Folder name for processed images
+if not os.path.exists(processed_images_folder):
+    os.makedirs(processed_images_folder)
+
+# Loop over every image and perform detection
+for image_path in images:
+    # Check if the image has already been processed
+    if image_path in processed_images:
+        continue  # Skip this image, as it has already been processed
+
+    # Load image and resize to the expected shape [1xHxWx3]
     image = cv2.imread(image_path)
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     imH, imW, _ = image.shape
     image_resized = cv2.resize(image_rgb, (width, height))
     input_data = np.expand_dims(image_resized, axis=0)
 
-    # Normalize pixel values if using a floating model (i.e., if the model is non-quantized)
     if floating_model:
         input_data = (np.float32(input_data) - input_mean) / input_std
 
-    # Perform the actual detection by running the model with the image as input
     interpreter.set_tensor(input_details[0]['index'], input_data)
     interpreter.invoke()
 
-    # Retrieve detection results
     boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]  # Bounding box coordinates of detected objects
     classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
     scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
     
-
-    # Loop over all detections and save cropped images if the detected object is "Leo Delen"
     for i in range(len(scores)):
         if 0 <= int(classes[i]) < len(labels) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0):
             object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
@@ -165,18 +173,13 @@ for image_path in images:
 
                 # Save the resized cropped image
                 image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                image_path = os.path.join(save_folder1, image_name)
-                cv2.imwrite(image_path, cropped_image_resized)  # Capture the frame
+                image_path_processed = os.path.join(processed_images_folder, image_name)
+                cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                 print("Resized and cropped image captured and saved!")
                 lord_john_perucho_counter += 1
                 
-# Show the image with the bounding boxes
-    # if show_results:
-    #     cv2.imshow('VisioAccelerAI Face Recognition', image)
-
-    #     # Press any key to continue to the next image, or press 'q' to quit
-    #     if cv2.waitKey(0) == ord('q'):
-    #         break
+                # Move the processed image to the processed_images folder
+                shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
 
 # Clean up
 cv2.destroyAllWindows()
