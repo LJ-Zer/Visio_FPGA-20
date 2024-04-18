@@ -173,13 +173,15 @@ for image_path in images:
 
                 # Save the resized cropped image
                 image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                image_path_processed = os.path.join(processed_images_folder, image_name)
+                image_path_processed = os.path.join(save_folder1, image_name)
                 cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                 print("Resized and cropped image captured and saved!")
                 lord_john_perucho_counter += 1
                 
                 # Move the processed image to the processed_images folder
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
+                processed_images.add(image_path)
+
 
 # Clean up
 cv2.destroyAllWindows()
