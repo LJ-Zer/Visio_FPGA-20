@@ -148,11 +148,12 @@ for image_path in images:
 
     detections = []
 
-    # Loop over all detections and draw detection box if confidence is above the minimum threshold
-    # ... (previous code remains unchanged)
+    processed_images = set()  # Track processed images
 
 # Loop over every image and perform detection
     for image_path in images:
+        if image_path in processed_images:
+            continue
         # Load image and resize to the expected shape [1xHxWx3]
         image = cv2.imread(image_path)
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -172,6 +173,8 @@ for image_path in images:
         boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]  # Bounding box coordinates of detected objects
         classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
         scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
+        
+        processed_images.add(image_path)
 
         # Loop over all detections and save cropped images if the detected object is "Leo Delen"
         for i in range(len(scores)):
