@@ -178,7 +178,7 @@ for image_path in images:
                 print("Resized and cropped image captured and saved!")
                 lord_john_perucho_counter += 1
                 
-                # Move the processed image to the processed_images folder
+                # .Move the processed image to the processed_images folder
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 processed_images.add(image_path)
 
