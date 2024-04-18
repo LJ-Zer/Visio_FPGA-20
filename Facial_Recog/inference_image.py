@@ -198,8 +198,8 @@ for image_path in images:
 
                     # Save the resized cropped image
                     image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                    image_path = os.path.join(save_folder1, image_name)
-                    cv2.imwrite(image_path, cropped_image_resized)  # Capture the frame
+                    image_path1 = os.path.join(save_folder1, image_name)
+                    cv2.imwrite(image_path1, cropped_image_resized)  # Capture the frame
                     print("Resized and cropped image captured and saved!")
                     lord_john_perucho_counter += 1
                    
