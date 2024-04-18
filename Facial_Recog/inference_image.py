@@ -149,6 +149,11 @@ for image_path in images:
     detections = []
 
     processed_images = set()  # Track processed images
+    PROCESSED_DIR = "../Face_Detect/processed_images"
+
+# Create directory for processed images if it doesn't exist
+    if not os.path.exists(PROCESSED_DIR):
+        os.makedirs(PROCESSED_DIR)
 
 # Loop over every image and perform detection
     for image_path in images:
@@ -199,11 +204,16 @@ for image_path in images:
                     cv2.imwrite(image_path, cropped_image_resized)  # Capture the frame
                     print("Resized and cropped image captured and saved!")
                     lord_john_perucho_counter += 1
+                     # Move the processed image (modify filename logic if needed)
+                    new_filename = os.path.basename(image_path)  # Extract filename from path
+                    new_path = os.path.join(PROCESSED_DIR, new_filename)
+                    os.rename(image_path, new_path)
+                    print(f"Image '{image_path}' processed and moved to '{new_path}'")
 
              
     # Show the image with the bounding boxes
-    # if show_results:
-    #     cv2.imshow('VisioAccelerAI Face Recognition', image)
+    if show_results:
+        cv2.imshow('VisioAccelerAI Face Recognition', image)
 
         # Press any key to continue to the next image, or press 'q' to quit
         if cv2.waitKey(0) == ord('q'):
