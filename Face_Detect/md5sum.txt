@@ -1,0 +1,2 @@
+a2093db8fc002dd992ced26f3a72607d  densebox_320_320.prototxt
+3a1921efb637d75e03f0ebb546f813ab  densebox_320_320.xmodel
