@@ -48,6 +48,11 @@ int main(int argc, char** argv) {
 
         // Face detection
         auto face_results = network->run(resized_frame);
+        // Update FPS calculation
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<double, std::milli> elapsed_ms = end - start;
+        fps = 1.0 / (elapsed_ms.count() / 1000.0);
+        start = end;
 
         for (const auto& r : face_results.rects) {
             // Scale bounding box coordinates to original frame size
