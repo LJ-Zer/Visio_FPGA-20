@@ -73,6 +73,16 @@ int main(int argc, char** argv) {
             int x2 = x1 + (r.width * frame_width);
             int y2 = y1 + (r.height * frame_height);
 
+             // **Insert the ROI check here:**
+            if (x1 >= 0 && y1 >= 0 && x2 <= frame.cols && y2 <= frame.rows) {
+                // Create face_roi only if coordinates are valid
+                Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
+                // ... rest of your code for processing face_roi ...
+            } else {
+                // Handle invalid ROI (e.g., print a message)
+                std::cout << "Warning: ROI coordinates outside frame bounds." << std::endl;
+            }
+            
             // Extract ROI (Region of Interest)
             Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
 
