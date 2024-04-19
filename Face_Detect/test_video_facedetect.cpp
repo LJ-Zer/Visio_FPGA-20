@@ -34,83 +34,83 @@ int main(int argc, char** argv) {
     double fps = 0.0;
     auto start = std::chrono::steady_clock::now();
 
-    while (true) {
-        Mat frame;
-        bool frame_read_success = cap.read(frame);  // Flag for read success
-        if (!frame_read_success) {
-        cerr << "Error reading frame from camera!" << endl;
-        break;
-        }
+        while (true) {
+            Mat frame;
+            bool frame_read_success = cap.read(frame);  // Flag for read success
+            if (!frame_read_success) {
+            cerr << "Error reading frame from camera!" << endl;
+            break;
+            }
 
-        // Print frame read status for debugging
-        std::cout << "Frame Read: " << (frame_read_success ? "Success" : "Failed") << std::endl;
+            // Print frame read status for debugging
+            std::cout << "Frame Read: " << (frame_read_success ? "Success" : "Failed") << std::endl;
 
-        // Resize for network input if necessary
-        Mat resized_frame;
-        if (frame.cols != 640 || frame.rows != 360) {
-        resize(frame, resized_frame, Size(640, 360));
-        } else {
-        resized_frame = frame; // Avoid unnecessary copy if sizes match
-        }
-
-        // Face detection
-        auto face_results = network->run(resized_frame);
-
-        // FPS calculation within the loop
-        double fps = 0.0;
-        auto start = std::chrono::steady_clock::now();
-
-        // Update FPS after processing each frame
-        auto end = std::chrono::steady_clock::now();
-        std::chrono::duration<double, std::milli> elapsed_ms = end - start;
-        fps = 1.0 / (elapsed_ms.count() / 1000.0);
-        start = end;
-
-        for (const auto& r : face_results.rects) {
-            // Scale bounding box coordinates to original frame size
-            int x1 = r.x * frame_width;
-            int y1 = r.y * frame_height;
-            int x2 = x1 + (r.width * frame_width);
-            int y2 = y1 + (r.height * frame_height);
-
-             // **Insert the ROI check here:**
-            if (x1 >= 0 && y1 >= 0 && x2 <= frame.cols && y2 <= frame.rows) {
-                // Create face_roi only if coordinates are valid
-                Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
-                // ... rest of your code for processing face_roi ...
+            // Resize for network input if necessary
+            Mat resized_frame;
+            if (frame.cols != 640 || frame.rows != 360) {
+            resize(frame, resized_frame, Size(640, 360));
             } else {
-                // Handle invalid ROI (e.g., print a message)
-                std::cout << "Warning: ROI coordinates outside frame bounds." << std::endl;
+            resized_frame = frame; // Avoid unnecessary copy if sizes match
+            }
+
+            // Face detection
+            auto face_results = network->run(resized_frame);
+
+            // FPS calculation within the loop
+            double fps = 0.0;
+            auto start = std::chrono::steady_clock::now();
+
+            // Update FPS after processing each frame
+            auto end = std::chrono::steady_clock::now();
+            std::chrono::duration<double, std::milli> elapsed_ms = end - start;
+            fps = 1.0 / (elapsed_ms.count() / 1000.0);
+            start = end;
+
+            for (const auto& r : face_results.rects) {
+                // Scale bounding box coordinates to original frame size
+                int x1 = r.x * frame_width;
+                int y1 = r.y * frame_height;
+                int x2 = x1 + (r.width * frame_width);
+                int y2 = y1 + (r.height * frame_height);
+
+                Mat face_roi;
+                try {
+                    face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
+                } catch (const cv::Exception& ex) {
+                    // Handle OpenCV exception if coordinates are out-of-bounds (optional)
+                    std::cerr << "Warning: ROI coordinates outside frame (" << ex.what() << ")" << std::endl;
+                    // You can choose to skip this detection or take other actions here
+                    continue;
+                }
+                
+                // Extract ROI (Region of Interest)
+                Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
+
+                // Save cropped face image with timestamp-based filename
+                time_t now = time(0);
+                tm *ltm = localtime(&now);
+                char filename[80];
+                strftime(filename, 80, "face_%Y-%m-%d_%H-%M-%S.jpg", ltm);
+
+                // Create the full path including "face_detected" folder
+                std::string full_path = "face_detected/" + std::string(filename);
+
+                imwrite(full_path, face_roi);
+                //LOG(INFO) << "Face cropped and saved to: " << full_path;
             }
             
-            // Extract ROI (Region of Interest)
-            Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
+            // Draw FPS text on the frame
+            std::stringstream fps_text;
+            fps_text << "FPS: " << std::fixed << std::setprecision(1) << fps;
+            putText(frame, fps_text.str(), Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 255, 0), 2);
 
-            // Save cropped face image with timestamp-based filename
-            time_t now = time(0);
-            tm *ltm = localtime(&now);
-            char filename[80];
-            strftime(filename, 80, "face_%Y-%m-%d_%H-%M-%S.jpg", ltm);
-
-            // Create the full path including "face_detected" folder
-            std::string full_path = "face_detected/" + std::string(filename);
-
-            imwrite(full_path, face_roi);
-            //LOG(INFO) << "Face cropped and saved to: " << full_path;
+            resize(frame, frame, Size(320, 320));
+            imshow("VisioAccelerAI", frame);
+            if (waitKey(10) == 27) { // Exit on ESC key press
+            break;
+            }
         }
-        
-        // Draw FPS text on the frame
-        std::stringstream fps_text;
-        fps_text << "FPS: " << std::fixed << std::setprecision(1) << fps;
-        putText(frame, fps_text.str(), Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 255, 0), 2);
 
-        resize(frame, frame, Size(320, 320));
-        imshow("VisioAccelerAI", frame);
-        if (waitKey(10) == 27) { // Exit on ESC key press
-        break;
-        }
+        cap.release();
+        return 0;
     }
-
-    cap.release();
-    return 0;
-}
