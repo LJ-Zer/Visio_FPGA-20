@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
             }
 
             // Print frame read status for debugging
-            std::cout << "Frame Read: " << (frame_read_success ? "Success" : "Failed") << std::endl;
+            // std::cout << "Frame Read: " << (frame_read_success ? "Success" : "Failed") << std::endl;
 
             // Resize for network input if necessary
             Mat resized_frame;
@@ -74,8 +74,7 @@ int main(int argc, char** argv) {
                     face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
                 } catch (const cv::Exception& ex) {
                     // Handle OpenCV exception if coordinates are out-of-bounds (optional)
-                    std::cerr << "Warning: ROI coordinates outside frame (" << ex.what() << ")" << std::endl;
-                    // You can choose to skip this detection or take other actions here
+                    // std::cerr << "Warning: ROI coordinates outside frame (" << ex.what() << ")" << std::endl;
                     continue;
                 }
                 
