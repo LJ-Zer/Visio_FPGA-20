@@ -83,9 +83,6 @@ int main(int argc, char** argv) {
                     continue;
                 }
                 
-                // Extract ROI (Region of Interest)
-                Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
-
                 // Save cropped face image with timestamp-based filename
                 time_t now = time(0);
                 tm *ltm = localtime(&now);
