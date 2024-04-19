@@ -36,23 +36,31 @@ int main(int argc, char** argv) {
 
     while (true) {
         Mat frame;
-        cap >> frame;
-        // if (frame.empty()) {
-        //     cerr << "Error reading frame from camera!" << endl;
-        //     break;
-        // }
+        bool frame_read_success = cap.read(frame);  // Flag for read success
+        if (!frame_read_success) {
+        cerr << "Error reading frame from camera!" << endl;
+        break;
+        }
+
+        // Print frame read status for debugging
+        std::cout << "Frame Read: " << (frame_read_success ? "Success" : "Failed") << std::endl;
 
         // Resize for network input if necessary
         Mat resized_frame;
         if (frame.cols != 640 || frame.rows != 360) {
-            resize(frame, resized_frame, Size(640, 360));
+        resize(frame, resized_frame, Size(640, 360));
         } else {
-            resized_frame = frame; // Avoid unnecessary copy if sizes match
+        resized_frame = frame; // Avoid unnecessary copy if sizes match
         }
 
         // Face detection
         auto face_results = network->run(resized_frame);
-        // Update FPS calculation
+
+        // FPS calculation within the loop
+        double fps = 0.0;
+        auto start = std::chrono::steady_clock::now();
+
+        // Update FPS after processing each frame
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double, std::milli> elapsed_ms = end - start;
         fps = 1.0 / (elapsed_ms.count() / 1000.0);
@@ -86,10 +94,10 @@ int main(int argc, char** argv) {
         fps_text << "FPS: " << std::fixed << std::setprecision(1) << fps;
         putText(frame, fps_text.str(), Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 255, 0), 2);
 
-        resize(frame, frame, Size(320,320));
+        resize(frame, frame, Size(320, 320));
         imshow("VisioAccelerAI", frame);
-        if (waitKey(10) == 27) {  // Exit on ESC key press
-            break;
+        if (waitKey(10) == 27) { // Exit on ESC key press
+        break;
         }
     }
 
