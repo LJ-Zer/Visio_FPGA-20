@@ -72,6 +72,10 @@ int main(int argc, char** argv) {
             //LOG(INFO) << "Face cropped and saved to: " << full_path;
         }
         
+        // Draw FPS text on the frame
+        std::stringstream fps_text;
+        fps_text << "FPS: " << std::fixed << std::setprecision(1) << fps;
+        putText(frame, fps_text.str(), Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 255, 0), 2);
 
         resize(frame, frame, Size(320,320));
         imshow("VisioAccelerAI", frame);
