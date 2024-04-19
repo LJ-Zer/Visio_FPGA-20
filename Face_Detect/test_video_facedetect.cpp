@@ -47,8 +47,8 @@ int main(int argc, char** argv) {
 
             // Resize for network input if necessary
             Mat resized_frame;
-            if (frame.cols != 120 || frame.rows != 120) {
-            resize(frame, resized_frame, Size(120, 120));
+            if (frame.cols != 640 || frame.rows != 360) {
+            resize(frame, resized_frame, Size(640, 360));
             } else {
             resized_frame = frame; // Avoid unnecessary copy if sizes match
             }
