@@ -49,36 +49,30 @@ int main(int argc, char** argv) {
         // Face detection
         auto face_results = network->run(resized_frame);
 
-        if (!face_results.rects.empty()) {
-            for (const auto& r : face_results.rects) {
-                // Scale bounding box coordinates to original frame size
-                int x1 = r.x * frame_width;
-                int y1 = r.y * frame_height;
-                int x2 = x1 + (r.width * frame_width);
-                int y2 = y1 + (r.height * frame_height);
+        for (const auto& r : face_results.rects) {
+            // Scale bounding box coordinates to original frame size
+            int x1 = r.x * frame_width;
+            int y1 = r.y * frame_height;
+            int x2 = x1 + (r.width * frame_width);
+            int y2 = y1 + (r.height * frame_height);
 
-                // Extract ROI (Region of Interest)
-                Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
+            // Extract ROI (Region of Interest)
+            Mat face_roi = frame(Rect(x1, y1, x2 - x1, y2 - y1));
 
-                // Save cropped face image with timestamp-based filename
-                time_t now = time(0);
-                tm *ltm = localtime(&now);
-                char filename[80];
-                strftime(filename, 80, "face_%Y-%m-%d_%H-%M-%S.jpg", ltm);
+            // Save cropped face image with timestamp-based filename
+            time_t now = time(0);
+            tm *ltm = localtime(&now);
+            char filename[80];
+            strftime(filename, 80, "face_%Y-%m-%d_%H-%M-%S.jpg", ltm);
 
-                // Create the full path including "face_detected" folder
-                std::string full_path = "face_detected/" + std::string(filename);
+            // Create the full path including "face_detected" folder
+            std::string full_path = "face_detected/" + std::string(filename);
 
-                imwrite(full_path, face_roi);
-                //LOG(INFO) << "Face cropped and saved to: " << full_path;
-            }
+            imwrite(full_path, face_roi);
+            //LOG(INFO) << "Face cropped and saved to: " << full_path;
         }
+        
 
-        // Display frame with bounding boxes (optional)
-        // You can uncomment this if you want to see the bounding boxes
-        // for (const auto& r : face_results.rects) {
-        //     cv::rectangle(frame, Point(x1, y1), Point(x2, y2), cv::Scalar(0, 5, 0));
-        // }
         resize(frame, frame, Size(320,320));
         imshow("VisioAccelerAI", frame);
         if (waitKey(10) == 27) {  // Exit on ESC key press
