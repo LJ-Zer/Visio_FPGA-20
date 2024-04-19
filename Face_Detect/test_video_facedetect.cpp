@@ -29,6 +29,10 @@ int main(int argc, char** argv) {
 
     // Create the "face_detected" folder if it doesn't exist
     create_directory("face_detected");  // Using std::filesystem
+    
+    // Variables for FPS calculation
+    double fps = 0.0;
+    auto start = std::chrono::steady_clock::now();
 
     while (true) {
         Mat frame;
