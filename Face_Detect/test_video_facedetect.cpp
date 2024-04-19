@@ -37,10 +37,10 @@ int main(int argc, char** argv) {
     while (true) {
         Mat frame;
         cap >> frame;
-        if (frame.empty()) {
-            cerr << "Error reading frame from camera!" << endl;
-            break;
-        }
+        // if (frame.empty()) {
+        //     cerr << "Error reading frame from camera!" << endl;
+        //     break;
+        // }
 
         // Resize for network input if necessary
         Mat resized_frame;
