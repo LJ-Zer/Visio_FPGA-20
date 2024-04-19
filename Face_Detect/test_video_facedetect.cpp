@@ -56,10 +56,6 @@ int main(int argc, char** argv) {
             // Face detection
             auto face_results = network->run(resized_frame);
 
-            // FPS calculation within the loop
-            double fps = 0.0;
-            auto start = std::chrono::steady_clock::now();
-
             // Update FPS after processing each frame
             auto end = std::chrono::steady_clock::now();
             std::chrono::duration<double, std::milli> elapsed_ms = end - start;
