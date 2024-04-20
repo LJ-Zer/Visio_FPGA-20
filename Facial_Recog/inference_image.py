@@ -201,7 +201,7 @@ for image_path in images:
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 processed_images.add(image_path)
         
-            if object_name == "Lord John Perucho" and (lord_john_perucho_counter == 3 or (time.localtime().tm_hour == 16 and time.localtime().tm_min >= 53)):
+            if object_name == "Lord John Perucho" and (time.localtime().tm_hour == 16 and time.localtime().tm_min >= 53):
                 if time.time() - lord_john_perucho_cooldown >= 60:
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -222,9 +222,9 @@ for image_path in images:
                      # Set flag to True after first detection
                     lord_john_perucho_cooldown = time.time()
 
-                    # .Move the processed image to the processed_images folder
-                    shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
-                    processed_images.add(image_path)
+                    # # .Move the processed image to the processed_images folder
+                    # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
+                    # processed_images.add(image_path)
 
 
 
