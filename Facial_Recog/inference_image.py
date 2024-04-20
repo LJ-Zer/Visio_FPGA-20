@@ -204,7 +204,7 @@ for image_path in images:
                 processed_images.add(image_path)
         
             if object_name == "Lord John Perucho" and lord_john_perucho_counter == 10: ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
-                if time.time() - lord_john_perucho_cooldown >= 5:
+                if time.time() - lord_john_perucho_cooldown >= 20:
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
