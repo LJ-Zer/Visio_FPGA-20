@@ -224,6 +224,8 @@ for image_path in images:
                 time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                 print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
                 print ("Time set: ", lord_john_perucho_cooldown)
+        else:
+            continue
 
 
 
