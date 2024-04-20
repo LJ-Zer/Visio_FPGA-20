@@ -165,7 +165,6 @@ for image_path in images:
             object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
 
             if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process:
-                if time.time() - lord_john_perucho_cooldown >= 20:
 
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -184,7 +183,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = time.time()  # Reset cooldown after processing
+                    lord_john_perucho_cooldown = 60  # Reset cooldown after processing
 
                 # # .Move the processed image to the processed_images folder
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
