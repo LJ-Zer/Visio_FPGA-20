@@ -175,7 +175,7 @@ for image_path in images:
                 cropped_image_resized = cv2.resize(cropped_image, (320, 320))
 
                 # Save the resized cropped image
-                image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                 image_path_processed = os.path.join(save_folder1, image_name)
                 cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                 lord_john_perucho_counter += 1
@@ -198,11 +198,11 @@ for image_path in images:
                 cropped_image_resized = cv2.resize(cropped_image, (320, 320))
 
                 # Save the resized cropped image
-                image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                image_name = f"'TO_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                 image_path_processed = os.path.join(save_folder1, image_name)
                 cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                 lord_john_perucho_counter += 1
-                lord_john_perucho_detected = True  # Set flag to True after first detection
+                lord_john_perucho_detected = False  # Set flag to True after first detection
                 
                 # .Move the processed image to the processed_images folder
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
