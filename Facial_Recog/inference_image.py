@@ -239,7 +239,7 @@ while True:
 
         if not images:
             print("No images to process")
-            time.sleep(60)
+            time.sleep(10)
             continue
 
 
