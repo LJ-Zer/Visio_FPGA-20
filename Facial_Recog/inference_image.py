@@ -183,7 +183,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = time.monotonic() # Store start time for cooldown
+                    lord_john_perucho_cooldown = time.monotonic() - lord_john_perucho_cooldown # Store start time for cooldown
                     # print (lord_john_perucho_cooldown)
                     print ("Time set: ", lord_john_perucho_cooldown)
             elif object_name == "Lord John Perucho" and lord_john_perucho_counter == 3 and (time.monotonic() - lord_john_perucho_cooldown >= 2): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
@@ -220,7 +220,8 @@ for image_path in images:
                 processed_images.add(image_path)
                 # print (lord_john_perucho_cooldown)
                 print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
-                
+                print ("Time set: ", lord_john_perucho_cooldown)
+
 
 
 
