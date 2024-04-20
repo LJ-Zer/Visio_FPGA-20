@@ -150,7 +150,7 @@ while True:
         # Check if the image has already been processed
         if image_path in processed_images:
             continue  # Skip this image, as it has already been processed
-        time.sleep(5)
+        time.sleep(2)
         # Load image and resize to the expected shape [1xHxWx3]
         image = cv2.imread(image_path)
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
