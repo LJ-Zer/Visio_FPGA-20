@@ -137,9 +137,6 @@ processed_images_folder = 'processed_images'  # Folder name for processed images
 if not os.path.exists(processed_images_folder):
     os.makedirs(processed_images_folder)
 while True:
-    if not images:
-        print("No images to process")
-        continue
 # Loop over every image and perform detection
     for image_path in images:
         # Check if the image has already been processed
@@ -227,7 +224,8 @@ while True:
                     print ("Time set: ", lord_john_perucho_cooldown)
             else:
                 continue
-        else:
+        if not images:
+            print("No images to process")
             continue
 
 
