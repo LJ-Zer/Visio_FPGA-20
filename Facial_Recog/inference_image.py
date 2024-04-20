@@ -230,11 +230,17 @@ while True:
                     time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                     print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
                     print ("Time set: ", lord_john_perucho_cooldown)
-            else:
-                continue
-    if not images:
-        print("No images to process")
-        continue
+    #         else:
+    #             continue
+    # if not images:
+    #     print("No images to process")
+    #     continue
+        image.clear()
+
+        if not images:
+            print("No images to process")
+            time.sleep(60)
+            continue
 
 
 
