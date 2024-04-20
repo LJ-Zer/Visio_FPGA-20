@@ -189,22 +189,7 @@ for image_path in images:
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 # processed_images.add(image_path)
 
-            if object_name == "Lord John Perucho":
-                now = datetime.datetime.now()
-                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
-                ymin = int(max(1, (boxes[i][0] * imH)))
-                xmin = int(max(1, (boxes[i][1] * imW)))
-                ymax = int(min(imH, (boxes[i][2] * imH)))
-                xmax = int(min(imW, (boxes[i][3] * imW)))
-                cropped_image = image[ymin:ymax, xmin:xmax]
-
-                # Resize the cropped image to the desired size (320x320)
-                lord_john_perucho_counter += 1
-                # .Move the processed image to the processed_images folder
-                shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
-                processed_images.add(image_path)
-        
-            elif object_name == "Lord John Perucho" and lord_john_perucho_counter == 10: ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
+            if object_name == "Lord John Perucho" and lord_john_perucho_counter == 3: ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                 if time.time() >= lord_john_perucho_cooldown:
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -230,8 +215,22 @@ for image_path in images:
                     # processed_images.add(image_path)
                 else:
                     continue
-            else:
-                continue
+            
+            elif object_name == "Lord John Perucho":
+                now = datetime.datetime.now()
+                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                ymin = int(max(1, (boxes[i][0] * imH)))
+                xmin = int(max(1, (boxes[i][1] * imW)))
+                ymax = int(min(imH, (boxes[i][2] * imH)))
+                xmax = int(min(imW, (boxes[i][3] * imW)))
+                cropped_image = image[ymin:ymax, xmin:xmax]
+
+                # Resize the cropped image to the desired size (320x320)
+                lord_john_perucho_counter += 1
+                # .Move the processed image to the processed_images folder
+                shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
+                processed_images.add(image_path)
+        
 
 
 
