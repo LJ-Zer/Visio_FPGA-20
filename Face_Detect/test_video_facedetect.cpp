@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
             fps_text << "FPS: " << std::fixed << std::setprecision(1) << fps;
             putText(frame, fps_text.str(), Point(10, 20), FONT_HERSHEY_SIMPLEX, 0.7, Scalar(0, 255, 0), 2);
 
-            resize(frame, frame, Size(120, 120));
+            resize(frame, frame, Size(320, 320));
             imshow("VisioAccelerAI", frame);
             if (waitKey(10) == 27) { // Exit on ESC key press
             break;
