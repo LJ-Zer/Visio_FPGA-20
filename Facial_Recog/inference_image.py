@@ -203,7 +203,8 @@ for image_path in images:
                     image_path_processed = os.path.join(save_folder1, image_name)
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_detected = True 
-                    time_lapse += 3 # Store start time for cooldown
+                    lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
+                    time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                     print ("Mid_IF", time_lapse)
             elif object_name == "Lord John Perucho":
                 now = datetime.datetime.now()
