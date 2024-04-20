@@ -131,15 +131,16 @@ if 'StatefulPartitionedCall' in outname:  # This is a TF2 model
 else:  # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
+image_paths = "../Face_Detect/face_detected"
 
 processed_images = set()
 processed_images_folder = 'processed_images'  # Folder name for processed images
 if not os.path.exists(processed_images_folder):
     os.makedirs(processed_images_folder)
 
-def get_image_paths(IM_DIR):
+def get_image_paths(image_paths):
   """Gets a list of image paths from the specified folder."""
-  return [os.path.join(IM_DIR, f) for f in os.listdir(IM_DIR) if f.endswith((".jpg", ".jpeg", ".png"))]  # Filter for image formats
+  return [os.path.join(image_paths, f) for f in os.listdir(image_paths) if f.endswith((".jpg", ".jpeg", ".png"))]  # Filter for image formats
 
 while True:
     images = get_image_paths('../Face_Detect/face_detected')
