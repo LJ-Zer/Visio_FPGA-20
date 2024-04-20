@@ -186,7 +186,7 @@ for image_path in images:
                     lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
                     # print (lord_john_perucho_cooldown)
                     print ("Time set: ", lord_john_perucho_cooldown)
-            if object_name == "Lord John Perucho" and lord_john_perucho_counter > 3 and (time_lapse > 5): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
+            if object_name == "Lord John Perucho" and lord_john_perucho_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
