@@ -219,7 +219,6 @@ for image_path in images:
 
                 # Resize the cropped image to the desired size (320x320)
                 lord_john_perucho_counter += 1
-                lord_john_perucho_detected = True  # Set flag to True after first detection
                 # .Move the processed image to the processed_images folder
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 processed_images.add(image_path)
