@@ -7,7 +7,7 @@ import glob
 import importlib.util
 import datetime
 import shutil  # Import the shutil module for file operations
-
+import time
 # Define and parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--modeldir', help='Folder the .tflite file is located in',
@@ -200,7 +200,7 @@ for image_path in images:
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 processed_images.add(image_path)
         
-            if object_name == "Lord John Perucho" and lord_john_perucho_counter == 3:
+            if object_name == "Lord John Perucho" and (lord_john_perucho_counter == 3 or (time.now().hour == 16 and time.now().minute >= 50)):
                 now = datetime.datetime.now()
                 timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                 ymin = int(max(1, (boxes[i][0] * imH)))
