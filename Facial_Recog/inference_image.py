@@ -219,7 +219,7 @@ for image_path in images:
                 shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 processed_images.add(image_path)
                 # print (lord_john_perucho_cooldown)
-                print ("Actual Time: ", time.monotonic())
+                print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
                 
 
 
