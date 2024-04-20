@@ -224,9 +224,9 @@ while True:
                     print ("Time set: ", lord_john_perucho_cooldown)
             else:
                 continue
-        if not images:
-            print("No images to process")
-            continue
+    if not images:
+        print("No images to process")
+        continue
 
 
 
