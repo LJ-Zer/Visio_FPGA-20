@@ -165,24 +165,26 @@ for image_path in images:
             object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
 
             if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process:
-                now = datetime.datetime.now()
-                timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
-                ymin = int(max(1, (boxes[i][0] * imH)))
-                xmin = int(max(1, (boxes[i][1] * imW)))
-                ymax = int(min(imH, (boxes[i][2] * imH)))
-                xmax = int(min(imW, (boxes[i][3] * imW)))
-                cropped_image = image[ymin:ymax, xmin:xmax]
+                if time.time() - lord_john_perucho_cooldown >= 20:
 
-                # Resize the cropped image to the desired size (320x320)
-                cropped_image_resized = cv2.resize(cropped_image, (320, 320))
+                    now = datetime.datetime.now()
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    ymin = int(max(1, (boxes[i][0] * imH)))
+                    xmin = int(max(1, (boxes[i][1] * imW)))
+                    ymax = int(min(imH, (boxes[i][2] * imH)))
+                    xmax = int(min(imW, (boxes[i][3] * imW)))
+                    cropped_image = image[ymin:ymax, xmin:xmax]
 
-                # Save the resized cropped image
-                image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                image_path_processed = os.path.join(save_folder1, image_name)
-                cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
-                lord_john_perucho_counter += 1
-                lord_john_perucho_detected = True  # Set flag to True after first detection
-                lord_john_perucho_cooldown = time.time()
+                    # Resize the cropped image to the desired size (320x320)
+                    cropped_image_resized = cv2.resize(cropped_image, (320, 320))
+
+                    # Save the resized cropped image
+                    image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                    image_path_processed = os.path.join(save_folder1, image_name)
+                    cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
+                    lord_john_perucho_counter += 1
+                    lord_john_perucho_detected = True  # Set flag to True after first detection
+                    lord_john_perucho_cooldown = time.time()  # Reset cooldown after processing
 
                 # # .Move the processed image to the processed_images folder
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
