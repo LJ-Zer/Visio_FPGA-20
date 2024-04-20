@@ -188,6 +188,8 @@ for image_path in images:
                 # # .Move the processed image to the processed_images folder
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 # processed_images.add(image_path)
+            if (time.time() >= lord_john_perucho_cooldown):
+                print ("Times Up!")
 
             if object_name == "Lord John Perucho" and lord_john_perucho_counter == 3 and (time.time() >= lord_john_perucho_cooldown): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                     now = datetime.datetime.now()
