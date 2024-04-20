@@ -183,10 +183,10 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = time.time() + 5  # Block the third if statement for 60 seconds
+                    lord_john_perucho_cooldown = time.monotonic() # Store start time for cooldown
                     # print (lord_john_perucho_cooldown)
                     print (time.monotonic())
-            elif object_name == "Lord John Perucho" and lord_john_perucho_counter == 3 and (time.time() >= lord_john_perucho_cooldown): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
+            elif object_name == "Lord John Perucho" and lord_john_perucho_counter == 3 and (time.monotonic() - lord_john_perucho_cooldown >= 5): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
@@ -203,7 +203,7 @@ for image_path in images:
                     image_path_processed = os.path.join(save_folder1, image_name)
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_detected = True 
-                    lord_john_perucho_cooldown = time.time() + 60  # Block the third if statement for 60 seconds
+                    lord_john_perucho_cooldown = time.monotonic() # Store start time for cooldown
             elif object_name == "Lord John Perucho":
                 now = datetime.datetime.now()
                 timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
