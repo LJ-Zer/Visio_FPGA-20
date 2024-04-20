@@ -183,7 +183,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = time.time() + 10  # Block the third if statement for 60 seconds
+                    lord_john_perucho_cooldown = time.time() + 5  # Block the third if statement for 60 seconds
 
                 # # .Move the processed image to the processed_images folder
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
