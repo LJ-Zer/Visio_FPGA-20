@@ -136,7 +136,14 @@ processed_images = set()
 processed_images_folder = 'processed_images'  # Folder name for processed images
 if not os.path.exists(processed_images_folder):
     os.makedirs(processed_images_folder)
+
+def get_image_paths(IM_DIR):
+  """Gets a list of image paths from the specified folder."""
+  return [os.path.join(IM_DIR, f) for f in os.listdir(IM_DIR) if f.endswith((".jpg", ".jpeg", ".png"))]  # Filter for image formats
+
 while True:
+    images = get_image_paths(IM_DIR)
+
 # Loop over every image and perform detection
     for image_path in images:
         # Check if the image has already been processed
