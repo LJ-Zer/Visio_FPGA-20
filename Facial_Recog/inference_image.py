@@ -194,6 +194,8 @@ while True:
                         lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
                         # print (lord_john_perucho_cooldown)
                         print ("Time set: ", lord_john_perucho_cooldown)
+                        images = get_image_paths("../Face_Detect/face_detected")
+
                 if object_name == "Lord John Perucho" and lord_john_perucho_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                         now = datetime.datetime.now()
                         timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -214,6 +216,8 @@ while True:
                         lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
                         time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                         print ("Mid_IF", time_lapse)
+                        images = get_image_paths("../Face_Detect/face_detected")
+
                 elif object_name == "Lord John Perucho":
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -230,6 +234,8 @@ while True:
                     time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                     print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
                     print ("Time set: ", lord_john_perucho_cooldown)
+                    images = get_image_paths("../Face_Detect/face_detected")
+
     #         else:
     #             continue
     # if not images:
