@@ -235,7 +235,7 @@ while True:
     # if not images:
     #     print("No images to process")
     #     continue
-        image.clear()
+        images = get_image_paths("../Face_Detect/face_detected")
 
         if not images:
             print("No images to process")
