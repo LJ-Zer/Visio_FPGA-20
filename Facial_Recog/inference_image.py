@@ -121,7 +121,7 @@ lord_john_perucho_counter = 0
 lord_john_perucho_detected = False  # Flag to track if "Lord John Perucho" is detected
 num_images_to_process = 1  # Number of "Lord John Perucho" images to capture
 total_lord_john_perucho_detected = 0  # Track total detections
-lord_john_perucho_cooldown = 0
+lord_john_perucho_cooldown = time.time()
 lord_john_perucho_cooldowns = 0
 
 outname = output_details[0]['name']
@@ -183,7 +183,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = time.time() + 0.9  # Block the third if statement for 60 seconds
+                    lord_john_perucho_cooldown = time.time() + 60  # Block the third if statement for 60 seconds
             elif object_name == "Lord John Perucho" and lord_john_perucho_counter == 3 and (time.time() >= lord_john_perucho_cooldown): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
