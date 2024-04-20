@@ -204,6 +204,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_detected = True 
                     lord_john_perucho_cooldown = time.monotonic() + 3 # Store start time for cooldown
+                    print ("Mid_IF", time_lapse)
             elif object_name == "Lord John Perucho":
                 now = datetime.datetime.now()
                 timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
