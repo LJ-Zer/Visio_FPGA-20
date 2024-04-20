@@ -189,7 +189,7 @@ for image_path in images:
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                 # processed_images.add(image_path)
 
-            elif object_name == "Lord John Perucho":
+            if object_name == "Lord John Perucho":
                 now = datetime.datetime.now()
                 timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                 ymin = int(max(1, (boxes[i][0] * imH)))
@@ -230,6 +230,8 @@ for image_path in images:
                     # processed_images.add(image_path)
                 else:
                     continue
+            else:
+                continue
 
 
 
