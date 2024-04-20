@@ -138,13 +138,7 @@ processed_images_folder = 'processed_images'  # Folder name for processed images
 if not os.path.exists(processed_images_folder):
     os.makedirs(processed_images_folder)
 
-def get_image_paths(image_paths):
-  """Gets a list of image paths from the specified folder."""
-  return [os.path.join(image_paths, f) for f in os.listdir(image_paths) if f.endswith((".jpg", ".jpeg", ".png"))]  # Filter for image formats
-
 while True:
-    images = get_image_paths('../Face_Detect/face_detected')
-
 # Loop over every image and perform detection
     for image_path in images:
         # Check if the image has already been processed
