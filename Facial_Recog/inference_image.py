@@ -119,6 +119,7 @@ if not os.path.exists(save_folder1):
 
 lord_john_perucho_counter = 0
 lord_john_perucho_detected = False  # Flag to track if "Lord John Perucho" is detected
+num_images_to_process = 1  # Number of "Lord John Perucho" images to capture
 
 outname = output_details[0]['name']
 
@@ -160,7 +161,7 @@ for image_path in images:
         if 0 <= int(classes[i]) < len(labels) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0):
             object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
 
-            if object_name == "Lord John Perucho" and not lord_john_perucho_detected:
+            if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process:
                 now = datetime.datetime.now()
                 timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                 ymin = int(max(1, (boxes[i][0] * imH)))
