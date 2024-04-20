@@ -226,6 +226,8 @@ for image_path in images:
                 print ("Time set: ", lord_john_perucho_cooldown)
         else:
             continue
+    else:
+        continue
 
 
 
