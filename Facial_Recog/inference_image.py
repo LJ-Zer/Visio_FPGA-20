@@ -183,7 +183,7 @@ for image_path in images:
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                     lord_john_perucho_counter += 1
                     lord_john_perucho_detected = True  # Set flag to True after first detection
-                    lord_john_perucho_cooldown = -20  # Reset cooldown after processing
+                    lord_john_perucho_cooldown = time.time() + 10  # Block the third if statement for 60 seconds
 
                 # # .Move the processed image to the processed_images folder
                 # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
@@ -205,7 +205,7 @@ for image_path in images:
                 processed_images.add(image_path)
         
             if object_name == "Lord John Perucho" and lord_john_perucho_counter == 10: ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
-                if time.time() - lord_john_perucho_cooldown >= 20:
+                if time.time() >= lord_john_perucho_cooldown:
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
@@ -221,13 +221,15 @@ for image_path in images:
                     image_name = f"'TO_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                     image_path_processed = os.path.join(save_folder1, image_name)
                     cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
-                    lord_john_perucho_detected = False 
+                    lord_john_perucho_detected = True 
                      # Set flag to True after first detection
                     lord_john_perucho_cooldown = time.time()
 
                     # # .Move the processed image to the processed_images folder
                     # shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                     # processed_images.add(image_path)
+                else:
+                    continue
 
 
 
