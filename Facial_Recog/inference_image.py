@@ -194,12 +194,7 @@ for image_path in images:
                 cropped_image = image[ymin:ymax, xmin:xmax]
 
                 # Resize the cropped image to the desired size (320x320)
-                cropped_image_resized = cv2.resize(cropped_image, (320, 320))
 
-                # Save the resized cropped image
-                image_name = f"{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
-                image_path_processed = os.path.join(save_folder1, image_name)
-                cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                 lord_john_perucho_counter += 1
                 lord_john_perucho_detected = True  # Set flag to True after first detection
                 
