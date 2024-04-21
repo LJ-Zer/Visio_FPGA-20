@@ -185,7 +185,7 @@ while True:
                         lord_john_perucho_counter += 1
                         lord_john_perucho_detected = True  # Set flag to True after first detection
                         lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
-                        print ("Time set: ", lord_john_perucho_cooldown)
+                        print ("Time In Detection: Lord John Perucho")
                         images = get_image_paths("../Face_Detect/face_detected")
 
                 if object_name == "Lord John Perucho" and lord_john_perucho_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
@@ -203,7 +203,8 @@ while True:
                         lord_john_perucho_detected = True 
                         lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
                         time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
-                        print ("Mid_IF", time_lapse)
+                        # print ("Mid_IF", time_lapse)
+                        print ("Time Out Detection: Lord John Perucho")
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Lord John Perucho":
                     now = datetime.datetime.now()
@@ -217,8 +218,9 @@ while True:
                     shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                     processed_images.add(image_path)
                     time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
-                    print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
-                    print ("Time set: ", lord_john_perucho_cooldown)
+                    # print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
+                    # print ("Time set: ", lord_john_perucho_cooldown)
+                    print("Dump Images: Lord John Perucho")
                     images = get_image_paths("../Face_Detect/face_detected")
 
         images = get_image_paths("../Face_Detect/face_detected")
