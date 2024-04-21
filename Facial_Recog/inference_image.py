@@ -145,13 +145,11 @@ def get_image_paths(image_paths):
 while True:
     images = get_image_paths("../Face_Detect/face_detected")
 
-# Loop over every image and perform detection
     for image_path in images:
         # Check if the image has already been processed
         if image_path in processed_images:
-            continue  # Skip this image, as it has already been processed
-        time.sleep(2)
-        # Load image and resize to the expected shape [1xHxWx3]
+            continue  
+        time.sleep(1)
         image = cv2.imread(image_path)
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         imH, imW, _ = image.shape
@@ -163,7 +161,6 @@ while True:
 
         interpreter.set_tensor(input_details[0]['index'], input_data)
         interpreter.invoke()
-
         boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]  # Bounding box coordinates of detected objects
         classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]  # Class index of detected objects
         scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]  # Confidence of detected objects
@@ -228,7 +225,7 @@ while True:
 
         if not images:
             print("No images to process")
-            time.sleep(10)
+            time.sleep(2)
             continue
 
 # Clean up
