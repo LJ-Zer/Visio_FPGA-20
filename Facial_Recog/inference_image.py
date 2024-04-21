@@ -181,18 +181,13 @@ while True:
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
-
-                        # Resize the cropped image to the desired size (320x320)
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-
-                        # Save the resized cropped image
                         image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         lord_john_perucho_counter += 1
                         lord_john_perucho_detected = True  # Set flag to True after first detection
                         lord_john_perucho_cooldown = time.monotonic()# Store start time for cooldown
-                        # print (lord_john_perucho_cooldown)
                         print ("Time set: ", lord_john_perucho_cooldown)
                         images = get_image_paths("../Face_Detect/face_detected")
 
@@ -204,11 +199,7 @@ while True:
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
-
-                        # Resize the cropped image to the desired size (320x320)
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-
-                        # Save the resized cropped image
                         image_name = f"'TO_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
@@ -217,7 +208,6 @@ while True:
                         time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
                         print ("Mid_IF", time_lapse)
                         images = get_image_paths("../Face_Detect/face_detected")
-
                 elif object_name == "Lord John Perucho":
                     now = datetime.datetime.now()
                     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
@@ -226,9 +216,7 @@ while True:
                     ymax = int(min(imH, (boxes[i][2] * imH)))
                     xmax = int(min(imW, (boxes[i][3] * imW)))
                     cropped_image = image[ymin:ymax, xmin:xmax]
-
                     lord_john_perucho_counter += 1
-                    # .Move the processed image to the processed_images folder
                     shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
                     processed_images.add(image_path)
                     time_lapse = int(time.monotonic() - lord_john_perucho_cooldown)
@@ -236,20 +224,12 @@ while True:
                     print ("Time set: ", lord_john_perucho_cooldown)
                     images = get_image_paths("../Face_Detect/face_detected")
 
-    #         else:
-    #             continue
-    # if not images:
-    #     print("No images to process")
-    #     continue
         images = get_image_paths("../Face_Detect/face_detected")
 
         if not images:
             print("No images to process")
             time.sleep(10)
             continue
-
-
-
 
 # Clean up
 cv2.destroyAllWindows()
