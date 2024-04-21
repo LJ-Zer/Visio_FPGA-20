@@ -118,11 +118,18 @@ if not os.path.exists(save_folder1):
     os.makedirs(save_folder1)
 
 lord_john_perucho_counter = 0
-lord_john_perucho_detected = False  # Flag to track if "Lord John Perucho" is detected
-num_images_to_process = 1  # Number of "Lord John Perucho" images to capture
-total_lord_john_perucho_detected = 0  # Track total detections
+lord_john_perucho_detected = False  
+num_images_to_process = 1  
+total_lord_john_perucho_detected = 0  
 lord_john_perucho_cooldown = time.monotonic()
 lord_john_perucho_cooldowns = 0
+
+leo_delen_counter = 0
+leo_delen_detected = False  
+num_images_to_process_leo = 1  
+total_leo_delen_detected = 0  
+leo_delen_cooldown = time.monotonic()
+leo_delen_cooldowns = 0
 
 outname = output_details[0]['name']
 
@@ -221,6 +228,59 @@ while True:
                     # print ("Actual Time: ", (time.monotonic() - lord_john_perucho_cooldown))
                     # print ("Time set: ", lord_john_perucho_cooldown)
                     print("Dump Images: Lord John Perucho")
+                    images = get_image_paths("../Face_Detect/face_detected")
+
+                
+                if object_name == "Leo Delen" and not leo_delen_detected and leo_delen_counter < num_images_to_process_leo:
+
+                        now = datetime.datetime.now()
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        ymin = int(max(1, (boxes[i][0] * imH)))
+                        xmin = int(max(1, (boxes[i][1] * imW)))
+                        ymax = int(min(imH, (boxes[i][2] * imH)))
+                        xmax = int(min(imW, (boxes[i][3] * imW)))
+                        cropped_image = image[ymin:ymax, xmin:xmax]
+                        cropped_image_resized = cv2.resize(cropped_image, (320, 320))
+                        image_name = f"'TI_'{timestamp}_{object_name} ({leo_delen_counter}).jpg"
+                        image_path_processed = os.path.join(save_folder1, image_name)
+                        cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
+                        leo_delen_counter += 1
+                        leo_delen_detected = True  # Set flag to True after first detection
+                        leo_delen_cooldown = time.monotonic()# Store start time for cooldown
+                        print ("Time In Detection: Leo Delen")
+                        images = get_image_paths("../Face_Detect/face_detected")
+
+                if object_name == "Leo Delen" and leo_delen_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
+                        now = datetime.datetime.now()
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        ymin = int(max(1, (boxes[i][0] * imH)))
+                        xmin = int(max(1, (boxes[i][1] * imW)))
+                        ymax = int(min(imH, (boxes[i][2] * imH)))
+                        xmax = int(min(imW, (boxes[i][3] * imW)))
+                        cropped_image = image[ymin:ymax, xmin:xmax]
+                        cropped_image_resized = cv2.resize(cropped_image, (320, 320))
+                        image_name = f"'TO_'{timestamp}_{object_name} ({leo_delen_counter}).jpg"
+                        image_path_processed = os.path.join(save_folder1, image_name)
+                        cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
+                        leo_delen_detected = True 
+                        leo_delen_cooldown = time.monotonic()# Store start time for cooldown
+                        time_lapse = int(time.monotonic() - leo_delen_cooldown)
+                        # print ("Mid_IF", time_lapse)
+                        print ("Time Out Detection: Leo Delen")
+                        images = get_image_paths("../Face_Detect/face_detected")
+                elif object_name == "Leo Delen":
+                    now = datetime.datetime.now()
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    ymin = int(max(1, (boxes[i][0] * imH)))
+                    xmin = int(max(1, (boxes[i][1] * imW)))
+                    ymax = int(min(imH, (boxes[i][2] * imH)))
+                    xmax = int(min(imW, (boxes[i][3] * imW)))
+                    cropped_image = image[ymin:ymax, xmin:xmax]
+                    leo_delen_counter += 1
+                    shutil.move(image_path, os.path.join(processed_images_folder, os.path.basename(image_path)))
+                    processed_images.add(image_path)
+                    time_lapse = int(time.monotonic() - leo_delen_cooldown)
+                    print("Dump Images: Leo Delen")
                     images = get_image_paths("../Face_Detect/face_detected")
 
         images = get_image_paths("../Face_Detect/face_detected")
