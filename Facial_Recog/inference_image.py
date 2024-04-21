@@ -265,7 +265,6 @@ while True:
                         leo_delen_detected = True 
                         leo_delen_cooldown = time.monotonic()# Store start time for cooldown
                         time_lapse = int(time.monotonic() - leo_delen_cooldown)
-                        # print ("Mid_IF", time_lapse)
                         print ("Time Out Detection: Leo Delen")
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Leo Delen":
@@ -282,10 +281,10 @@ while True:
                     time_lapse = int(time.monotonic() - leo_delen_cooldown)
                     print("Dump Images: Leo Delen")
                     images = get_image_paths("../Face_Detect/face_detected")
-
         images = get_image_paths("../Face_Detect/face_detected")
 
         if not images:
+            images = get_image_paths("../Face_Detect/face_detected")
             print("No images to process")
             time.sleep(2)
             continue
