@@ -119,7 +119,7 @@ if not os.path.exists(save_folder1):
 
 lord_john_perucho_counter = 0
 lord_john_perucho_detected = False  
-num_images_to_process = 1  
+num_images_to_process_lord = 1  
 total_lord_john_perucho_detected = 0  
 lord_john_perucho_cooldown = time.monotonic()
 lord_john_perucho_cooldowns = 0
@@ -176,7 +176,7 @@ while True:
             if 0 <= int(classes[i]) < len(labels) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0):
                 object_name = labels[int(classes[i])]  # Look up object name from the "labels" array using the class index
 
-                if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process:
+                if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process_lord:
 
                         now = datetime.datetime.now()
                         timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
