@@ -1,3 +1,3 @@
-export GIT_TOKEN=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
+export GIT_TOKEN=
 cd Facial_Recog
 python Git_Upload.py
