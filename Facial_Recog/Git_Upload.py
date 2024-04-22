@@ -22,8 +22,8 @@ try:
 
     # Pull the latest changes from the remote repository
     subprocess.run(['git', 'pull', 'origin', 'master'], env={'GIT_TOKEN': git_token})
+    subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
 
-    # ... (rest of your script)
 
 except KeyboardInterrupt:
   sys.exit()
