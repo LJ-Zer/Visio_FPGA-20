@@ -193,14 +193,14 @@ while True:
 
                 if object_name == "Lord John Perucho" and not lord_john_perucho_detected and lord_john_perucho_counter < num_images_to_process_lord:
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TI_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                        image_name = f"TI_{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         lord_john_perucho_counter += 1
@@ -210,14 +210,14 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 if object_name == "Lord John Perucho" and lord_john_perucho_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TO_'{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
+                        image_name = f"TO_{timestamp}_{object_name} ({lord_john_perucho_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         lord_john_perucho_detected = True 
@@ -228,7 +228,7 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Lord John Perucho":
                     now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
                     xmin = int(max(1, (boxes[i][1] * imW)))
                     ymax = int(min(imH, (boxes[i][2] * imH)))
@@ -245,14 +245,14 @@ while True:
 
                 if object_name == "Leo Delen" and not leo_delen_detected and leo_delen_counter < num_images_to_process_leo:
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TI_'{timestamp}_{object_name} ({leo_delen_counter}).jpg"
+                        image_name = f"TI_{timestamp}_{object_name} ({leo_delen_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         leo_delen_counter += 1
@@ -262,14 +262,14 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 if object_name == "Leo Delen" and leo_delen_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TO_'{timestamp}_{object_name} ({leo_delen_counter}).jpg"
+                        image_name = f"TO_{timestamp}_{object_name} ({leo_delen_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         leo_delen_detected = True 
@@ -279,7 +279,7 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Leo Delen":
                     now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
                     xmin = int(max(1, (boxes[i][1] * imW)))
                     ymax = int(min(imH, (boxes[i][2] * imH)))
@@ -294,14 +294,14 @@ while True:
 
                 if object_name == "Frank Lester castillo" and not frank_castillo_detected and frank_castillo_counter < num_images_to_process_frank:
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TI_'{timestamp}_{object_name} ({frank_castillo_counter}).jpg"
+                        image_name = f"TI_{timestamp}_{object_name} ({frank_castillo_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         frank_castillo_counter += 1
@@ -311,14 +311,14 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 if object_name == "Frank Lester castillo" and frank_castillo_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TO_'{timestamp}_{object_name} ({frank_castillo_counter}).jpg"
+                        image_name = f"TO_{timestamp}_{object_name} ({frank_castillo_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         frank_castillo_detected = True 
@@ -329,7 +329,7 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Frank Lester castillo":
                     now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
                     xmin = int(max(1, (boxes[i][1] * imW)))
                     ymax = int(min(imH, (boxes[i][2] * imH)))
@@ -344,14 +344,14 @@ while True:
 
                 if object_name == "Queenie Rose Amargo" and not queenie_amargo_detected and queenie_amargo_counter < num_images_to_process_queenie:
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TI_'{timestamp}_{object_name} ({queenie_amargo_counter}).jpg"
+                        image_name = f"TI_{timestamp}_{object_name} ({queenie_amargo_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         queenie_amargo_counter += 1
@@ -361,14 +361,14 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 if object_name == "Queenie Rose Amargo" and queenie_amargo_counter > 5 and (time_lapse > 60): ##time.localtime().tm_hour == 17 and time.localtime().tm_min >= 12
                         now = datetime.datetime.now()
-                        timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                        timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                         ymin = int(max(1, (boxes[i][0] * imH)))
                         xmin = int(max(1, (boxes[i][1] * imW)))
                         ymax = int(min(imH, (boxes[i][2] * imH)))
                         xmax = int(min(imW, (boxes[i][3] * imW)))
                         cropped_image = image[ymin:ymax, xmin:xmax]
                         cropped_image_resized = cv2.resize(cropped_image, (320, 320))
-                        image_name = f"'TO_'{timestamp}_{object_name} ({queenie_amargo_counter}).jpg"
+                        image_name = f"TO_{timestamp}_{object_name} ({queenie_amargo_counter}).jpg"
                         image_path_processed = os.path.join(save_folder1, image_name)
                         cv2.imwrite(image_path_processed, cropped_image_resized)  # Capture the frame
                         queenie_amargo_detected = True 
@@ -378,7 +378,7 @@ while True:
                         images = get_image_paths("../Face_Detect/face_detected")
                 elif object_name == "Queenie Rose Amargo":
                     now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")  # YYYY-MM-DD_HH-MM-SS format
+                    timestamp = now.strftime("%Y-%m-%d_%H-%M")  # YYYY-MM-DD_HH-MM-SS format
                     ymin = int(max(1, (boxes[i][0] * imH)))
                     xmin = int(max(1, (boxes[i][1] * imW)))
                     ymax = int(min(imH, (boxes[i][2] * imH)))
