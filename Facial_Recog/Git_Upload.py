@@ -31,11 +31,11 @@ try:
     commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
     subprocess.run(['git', 'commit', '-m', commit_message])
 
-    # # Option 1: Using environment variable (preferred)
-    # subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
+    # Option 1: Using environment variable (preferred)
+    subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
 
-    # # Option 2: Explicitly setting username with PAT (alternative)
-    subprocess.run(['git', 'push', 'origin', 'master', '--token', git_token])
+    # # # Option 2: Explicitly setting username with PAT (alternative)
+    # subprocess.run(['git', 'push', 'origin', 'master', '--token', git_token])
 
     # Add a delay of 5 seconds before the next iteration
     time.sleep(5)
