@@ -20,7 +20,7 @@ try:
     subprocess.run(['git', 'config', '--global', 'user.email', '20-06391@g.batstate-u.edu.ph'])
     subprocess.run(['git', 'config', '--global', 'user.name', 'Zer-000'])
     GIT_TOKEN = 'GIT_TOKEN'
-    # Change to the repository directory
+    # Change to the repository directory    
     os.chdir(repository_path)
 
     # Pull the latest changes from the remote repository
@@ -30,11 +30,11 @@ try:
     subprocess.run(['git', 'add', '.'])
 
     # Commit changes with a descriptive message (consider adding timestamp)
-    commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
-    subprocess.run(['git', 'commit', '-m', commit_message])
+    # commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
+    # subprocess.run(['git', 'commit', '-m', commit_message])
 
-    # Push changes to the remote repository
-    subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
+    # # Push changes to the remote repository
+    # subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
 
     # Add a delay of 5 seconds before the next iteration
     time.sleep(5)
