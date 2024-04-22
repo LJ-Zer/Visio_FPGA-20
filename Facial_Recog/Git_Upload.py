@@ -25,14 +25,14 @@ try:
     subprocess.run(['git', 'pull', 'origin', 'master'], env={'GIT_TOKEN': git_token})
 
     # Add all tracked files (including new images)
-    subprocess.run(['git', 'add', '.'])
+    # subprocess.run(['git', 'add', '.'])
 
-    # Commit changes with a descriptive message (consider adding timestamp)
-    commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
-    subprocess.run(['git', 'commit', '-m', commit_message])
+    # # Commit changes with a descriptive message (consider adding timestamp)
+    # commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
+    # subprocess.run(['git', 'commit', '-m', commit_message])
 
-    # Push changes to the remote repository
-    subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
+    # # Push changes to the remote repository
+    # subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
 
     # Add a delay of 5 seconds before the next iteration
     time.sleep(5)
