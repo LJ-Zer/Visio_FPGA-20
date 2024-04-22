@@ -167,10 +167,11 @@ while True:
     images = get_image_paths("../Face_Detect/face_detected")
 
     for image_path in images:
+        images = get_image_paths("../Face_Detect/face_detected")
         # Check if the image has already been processed
         if image_path in processed_images:
             continue  
-        # time.sleep(1)
+        time.sleep(1)
         image = cv2.imread(image_path)
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         imH, imW, _ = image.shape
