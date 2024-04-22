@@ -17,6 +17,7 @@ try:
     sys.exit(1)
 
   while True:
+    GIT_TOKEN = "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"
     # Change to the repository directory
     os.chdir(repository_path)
 
