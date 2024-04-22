@@ -393,7 +393,7 @@ while True:
         images = get_image_paths("../Face_Detect/face_detected")
 
         if not images:
-            images = get_image_paths("../Face_Detect/face_detected")
+            # images = get_image_paths("../Face_Detect/face_detected")
             print("No images to process")
             time.sleep(2)
             continue
