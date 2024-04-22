@@ -7,8 +7,8 @@ import time
 repository_path = "/home/ubuntu/Desktop/Visio_FPGA/Facial_Recog/Face-Detected"
 
 # Configure Git with user name and email
-subprocess.run(['git', 'config', '--global', 'user.email', '20-06391@g.batstate-u.edu.ph'])
-subprocess.run(['git', 'config', '--global', 'user.name', 'Zer-000'])
+# subprocess.run(['git', 'config', '--global', 'user.email', '20-06391@g.batstate-u.edu.ph'])
+# subprocess.run(['git', 'config', '--global', 'user.name', 'Zer-000'])
 
 try:
   git_token = os.environ.get('GIT_TOKEN')
