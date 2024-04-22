@@ -30,8 +30,8 @@ try:
     subprocess.run(['git', 'add', '.'])
 
     # Commit changes with a descriptive message (consider adding timestamp)
-    # commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
-    # subprocess.run(['git', 'commit', '-m', commit_message])
+    commit_message = f"Automatic Upload - {time.strftime('%Y-%m-%d %H:%M:%S')}"
+    subprocess.run(['git', 'commit', '-m', commit_message])
 
     # # Push changes to the remote repository
     # subprocess.run(['git', 'push', 'origin', 'master'], env={'GIT_TOKEN': git_token})
