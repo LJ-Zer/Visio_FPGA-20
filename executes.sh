@@ -1,4 +1,4 @@
-sh Face_Detect.sh &
+chmod +x Face_Detect.sh &
 "Face_Detect is Running"
-sh Facial_Recog.sh &
+chmod +x Facial_Recog.sh &
 "Facial_Recog is Running"
