@@ -113,7 +113,7 @@ floating_model = (input_details[0]['dtype'] == np.float32)
 input_mean = 127.5
 input_std = 127.5
 
-save_folder1 = 'Face-Detected'  # Folder name to store captured images
+save_folder1 = '../../Face-Detected'  # Folder name to store captured images
 if not os.path.exists(save_folder1):
     os.makedirs(save_folder1)
 
