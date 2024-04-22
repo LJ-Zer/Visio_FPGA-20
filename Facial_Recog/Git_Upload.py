@@ -4,7 +4,7 @@ import sys
 import time
 
 # Path to the local repository directory
-repository_path = "/home/ubuntu/Desktop/Visio_FPGA/Facial_Recog/Face-Detected"
+repository_path = "/home/ubuntu/Desktop/Face-Detected"
 
 # Configure Git with user name and email
 subprocess.run(['git', 'config', '--global', 'user.email', '20-06391@g.batstate-u.edu.ph'])
